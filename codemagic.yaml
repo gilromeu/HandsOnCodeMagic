@@ -1,13 +1,5 @@
 workflows:
   my-workflow:
-    triggering:
-      events:
-        - push
     scripts:
-      - name: Build Android App Bundle
-        working_directory: android
-        script: |
-          echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
-          cd android && ./gradlew assembleRelease
-    artifacts:
-      - build/**/outputs/bundle/**/*.aab
+      - name: say hello
+        script: echo "Hello Codemagician!"
