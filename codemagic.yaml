@@ -1,0 +1,10 @@
+workflows:
+  my-workflow:
+    scripts:
+      - name: Build Android App Bundle
+        working_directory: android
+        script: |
+          echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
+          cd android && ./gradlew assembleRelease
+    artifacts:
+      - build/**/outputs/bundle/**/*.aab
