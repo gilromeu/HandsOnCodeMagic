@@ -1,5 +1,8 @@
 workflows:
   my-workflow:
+    triggering:
+      events:
+        - push
     scripts:
       - name: Build Android App Bundle
         working_directory: android
