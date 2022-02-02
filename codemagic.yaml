@@ -1,16 +1,8 @@
-# Workflow setup for building Native Android project
 workflows:
-  # The following workflow is for generating a debug build
-  debug-workflow: # workflow ID
-    name: Native Android # workflow name
-    max_build_duration: 60 # max build duration in minutes
+  my-workflow:
     scripts:
-      - name: Build Android App Bundle
+      - name: Build Android APK
         working_directory: android
-        script: ./gradlew bundleRelease
+        script: ./gradlew assembleRelease
     artifacts:
-      - app/build/**/outputs/**/*.aab
-    publishing:
-      email:
-        recipients:
-          - gilromeu.p@gmail.com # enter your email id here
+      - app/build/outputs/**/**/*.apk
