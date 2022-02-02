@@ -4,21 +4,8 @@ workflows:
     name: Native Android # workflow name
     max_build_duration: 60 # max build duration in minutes
     scripts:
-      - |
-        # set up debug keystore
-        rm -f ~/.android/debug.keystore
-        keytool -genkeypair \
-          -alias androiddebugkey \
-          -keypass android \
-          -keystore ~/.android/debug.keystore \
-          -storepass android \
-          -dname 'CN=Android Debug,O=Android,C=US' \
-          -keyalg 'RSA' \
-          -keysize 2048 \
-          -validity 10000
-      - |
         # build debug apk
-        ./gradlew assembleDebug
+        - ./gradlew assembleDebug
     artifacts:
       - app/build/**/outputs/**/*.apk
     publishing:
