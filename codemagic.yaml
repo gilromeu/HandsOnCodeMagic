@@ -24,4 +24,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - gilromeu.p@gmail.com # enter your email id here
+          - gilromeu.p@gmail.com # enter your email id her
