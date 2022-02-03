@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:    
-    - uses: r0adkll/sign-android-release@v1
+    - uses: iota9star/sign-android-release@v1.0.5
       name: Sign app APK
       # ID used to access action output
       id: sign_app
