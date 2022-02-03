@@ -19,8 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:    
-    - uses: Tlaster/android-sign@v1
-      name: Sign app APK
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Generate Release APK
+      run: ./gradlew bundleRelease && ./gradlew assembleRelease
+    - name: Sign APK
+      uses: r0adkll/sign-android-release@v1
+      # ID used to access action output
+      id: sign_app
       with:
         releaseDirectory: |
           app/build/outputs/apk/release
