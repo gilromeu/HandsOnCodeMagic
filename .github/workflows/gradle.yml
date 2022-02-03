@@ -26,6 +26,10 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@bc3340afc5e3cc44f2321809ac090d731c13c514
+      run: ./gradlew build
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.3.1
       with:
-        arguments: build
+        name: app
+        path: app/build/outputs/apk/debug/app-debug.apk
