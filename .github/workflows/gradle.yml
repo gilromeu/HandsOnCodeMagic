@@ -19,13 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:    
-    - uses: iota9star/sign-android-release@v1.0.5
+    - uses: r0adkll/sign-android-release@v1
       name: Sign app APK
       # ID used to access action output
       id: sign_app
       with:
         releaseDirectory: app/build/outputs/apk/release
-        fileRex: .*apk
         signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -34,9 +33,17 @@ jobs:
         # override default build-tools version (29.0.3) -- optional
         BUILD_TOOLS_VERSION: "30.0.2"
         
-    # Example use of `signedReleaseFile` output -- not needed
-    - uses: actions/upload-artifact@v2
+    - name: Example Release
+      uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        name: Signed app bundle
-        path: ${{steps.sign_app.outputs.signedReleaseFile}}
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        title: "Release v1.0"
+        files: |
+          ${{ steps.sign_app.signedReleaseFile0 }}
+          ${{ steps.sign_app.signedReleaseFile1 }}
+          ${{ steps.sign_app.signedReleaseFile2 }}
+          ${{ steps.sign_app.signedReleaseFile3 }}
+          ${{ steps.sign_app.signedReleaseFile4 }}
     
