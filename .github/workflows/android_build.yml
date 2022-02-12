@@ -49,8 +49,8 @@ jobs:
           path: app/build/outputs/bundle/release/*.aab
           if-no-files-found: error
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
+     # - name: Build Release APK
+      #  run: ./gradlew assembleRelease
         
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
