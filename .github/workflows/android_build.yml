@@ -1,0 +1,44 @@
+name: Build Release App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:    
+    
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+     
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+    
+      - name: Run Tests
+        run: ./gradlew test
+        
+      - name: Build Project
+        run: ./gradlew build
+
+      - name: Build Release AAB
+        run: ./gradlew bundleRelease
+        
+      - name: Sign AAB
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
