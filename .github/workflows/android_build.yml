@@ -25,8 +25,8 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
     
-      - name: Run Tests
-        run: ./gradlew test
+      #- name: Run Tests
+        # run: ./gradlew test
         
       - name: Build Project
         run: ./gradlew build
@@ -45,6 +45,24 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-          name: Upload bundle
+          name: v1.0
           path: app/build/outputs/bundle/release
+          if-no-files-found: error
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+        
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: v1.0
+          path: app/build/outputs/apk/release
           if-no-files-found: error
