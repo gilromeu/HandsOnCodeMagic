@@ -42,3 +42,8 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Upload bundle
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
