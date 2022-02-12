@@ -46,4 +46,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Upload bundle
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          path: app/build/outputs/bundle/release
+          if-no-files-found: error
