@@ -46,7 +46,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: v1.0
-          path: app/build/outputs/bundle/release
+          path: app/build/outputs/bundle/release/*.aab
           if-no-files-found: error
 
       - name: Build Release APK
@@ -64,5 +64,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: v1.0
-          path: app/build/outputs/apk/release
+          path: app/build/outputs/apk/release/*.apk
           if-no-files-found: error
