@@ -31,8 +31,11 @@ jobs:
       #- name: Build Project
        # run: ./gradlew build
 
-     # - name: Build Release AAB
-     #   run: ./gradlew bundleRelease
+      - name: Build Release AAB
+        run: ./gradlew app:bundleRelease
+        
+      - name: Build Release APK
+        run: ./gradlew app:assembleRelease
         
       - name: Sign AAB
         uses: r0adkll/sign-android-release@v1
