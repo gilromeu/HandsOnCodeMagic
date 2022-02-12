@@ -28,11 +28,11 @@ jobs:
       #- name: Run Tests
         # run: ./gradlew test
         
-      - name: Build Project
-        run: ./gradlew build
+      #- name: Build Project
+       # run: ./gradlew build
 
-      - name: Build Release AAB
-        run: ./gradlew bundleRelease
+     # - name: Build Release AAB
+     #   run: ./gradlew bundleRelease
         
       - name: Sign AAB
         uses: r0adkll/sign-android-release@v1
@@ -43,11 +43,11 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
           
-      - uses: actions/upload-artifact@v2
-        with:
-          name: v1.0
-          path: app/build/outputs/bundle/release/*.aab
-          if-no-files-found: error
+     # - uses: actions/upload-artifact@v2
+      #  with:
+       #   name: v1.0
+        #  path: app/build/outputs/bundle/release/*.aab
+         # if-no-files-found: error
 
      # - name: Build Release APK
       #  run: ./gradlew assembleRelease
@@ -63,6 +63,6 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-          name: v1.0-APK
-          path: app/build/outputs/apk/release/*.apk
+          name: v1.0
+          path: app/build/outputs/**/**/*.apk
           if-no-files-found: error
