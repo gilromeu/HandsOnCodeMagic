@@ -24,9 +24,6 @@ jobs:
      
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
-
-      - name: Delete all file
-        run: rm -r app/build/outputs/apk/*  app/build/outputs/bundle/*
         
       - name: Build Release AAB
         run: ./gradlew app:bundleRelease app:assembleRelease
