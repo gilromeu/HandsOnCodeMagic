@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def versionPropertiesFile = rootProject.file("version.properties")
+def versionProperties = new Properties()
+versionProperties.load(new FileInputStream(versionPropertiesFile))
+
 android {
     compileSdk 31
 
@@ -12,18 +16,40 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        setProperty("archivesBaseName", versionProperties['versionProduction'] )
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
-        release {
+        /*release {
             if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
+                System.out.println("If")
                 storeFile file(System.getenv()["FCI_KEYSTORE_PATH"])
                 storePassword System.getenv()["FCI_KEYSTORE_PASSWORD"]
                 keyAlias System.getenv()["FCI_KEY_ALIAS"]
                 keyPassword System.getenv()["FCI_KEY_PASSWORD"]
+            } else {
+                System.out.println("Else")
+                storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
+                storePassword '667624'
+                keyPassword '667624'
+                keyAlias 'key0'
             }
+        }*/
+
+        develop {
+            System.out.println(versionProperties['versionDevelop'])
+            storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
+            storePassword '667624'
+            keyPassword '667624'
+            keyAlias 'key0'
+        }
+        production {
+            System.out.println(versionProperties['versionProduction'])
+            storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
+            storePassword '667624'
+            keyPassword '667624'
+            keyAlias 'key0'
         }
     }
 
@@ -31,7 +57,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.develop
         }
     }
     compileOptions {
