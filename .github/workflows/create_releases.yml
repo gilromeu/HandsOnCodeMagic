@@ -36,8 +36,8 @@ jobs:
         env:
           VERSION: ${{ steps.read_property.outputs.value }}
 
-      - name: Build Release AAB
-        run: ./gradlew app:assembleRelease
+#      - name: Build Release AAB
+#        run: ./gradlew app:assembleRelease
 
       - uses: iota9star/sign-android-release@v1.0.5
         name: Sign app APK
