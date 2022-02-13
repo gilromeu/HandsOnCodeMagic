@@ -25,6 +25,9 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+      - name: Delete all file
+        run: rm -r app/build/outputs/apk/*  app/build/outputs/bundle/*
+        
       - name: Build Release AAB
         run: ./gradlew app:bundleRelease app:assembleRelease
         
@@ -49,5 +52,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: v1.0
-          path: app/build/outputs/**/**/*
+          path: |
+            app/build/outputs/bundle/release/*.aab
+            app/build/outputs/apk/release/*.apk
           if-no-files-found: error
