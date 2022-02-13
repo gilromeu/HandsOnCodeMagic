@@ -33,13 +33,9 @@ jobs:
           property: 'versionDevelop'
       - name: Do something with your bumped release version
         run: echo ${{ steps.read_property.outputs.value }}
-
         env:
-          VERSION_CODE: steps.read_property.outputs.value
-
-        - name: Do something with your bumped release version
-          run: echo ${{ VERSION_CODE }}
-
+          VERSION: ${{ steps.read_property.outputs.value }}
+          run: echo ${{ env.VERSION }}
 #      - name: Build Release AAB
 #        run: ./gradlew app:bundleRelease app:assembleRelease
 #
