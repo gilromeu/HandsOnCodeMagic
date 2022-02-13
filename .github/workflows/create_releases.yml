@@ -36,16 +36,12 @@ jobs:
         env:
           VERSION: ${{ steps.read_property.outputs.value }}
 
-#      - name: Build Release AAB
-#        run: ./gradlew app:assembleRelease
-
-      - uses: iota9star/sign-android-release@v1.0.5
-        name: Sign app APK
-        # ID used to access action output
-        id: sign_app
+      - name: Build Release AAB
+        run: ./gradlew app:bundleRelease app:assembleRelease
+      - name: Sign AAB
+        uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: app/build/outputs/apk/release
-          fileRex: .*apk
+          releaseDirectory: app/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -54,20 +50,10 @@ jobs:
       # Example use of `signedReleaseFile` output -- not needed
       - uses: actions/upload-artifact@v2
         with:
-          name: Signed app
+          name: ${{ VERSION }}
           path: ${{steps.sign_app.outputs.signedReleaseFiles}}
-#
-#      - name: Build Release AAB
-#        run: ./gradlew app:bundleRelease app:assembleRelease
-#      - name: Sign AAB
-#        uses: r0adkll/sign-android-release@v1
-#        with:
-#          releaseDirectory: app/build/outputs/bundle/release
-#          signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
-#          alias: ${{ secrets.ALIAS }}
-#          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-#          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
-#
+          if-no-files-found: error
+
 #      - uses: actions/upload-artifact@v2
 #        with:
 #          name: v1.0
