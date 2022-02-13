@@ -38,18 +38,32 @@ android {
         }*/
 
         develop {
-            System.out.println(versionProperties['versionDevelop'])
-            storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
-            storePassword '667624'
-            keyPassword '667624'
-            keyAlias 'key0'
+            if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
+                System.out.println("If")
+                storeFile file(System.getenv()["FCI_KEYSTORE_PATH"])
+                storePassword System.getenv()["FCI_KEYSTORE_PASSWORD"]
+                keyAlias System.getenv()["FCI_KEY_ALIAS"]
+                keyPassword System.getenv()["FCI_KEY_PASSWORD"]
+            } else {
+                storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
+                storePassword '667624'
+                keyPassword '667624'
+                keyAlias 'key0'
+            }
         }
         production {
-            System.out.println(versionProperties['versionProduction'])
-            storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
-            storePassword '667624'
-            keyPassword '667624'
-            keyAlias 'key0'
+            if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
+                System.out.println("If")
+                storeFile file(System.getenv()["FCI_KEYSTORE_PATH"])
+                storePassword System.getenv()["FCI_KEYSTORE_PASSWORD"]
+                keyAlias System.getenv()["FCI_KEY_ALIAS"]
+                keyPassword System.getenv()["FCI_KEY_PASSWORD"]
+            } else {
+                storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
+                storePassword '667624'
+                keyPassword '667624'
+                keyAlias 'key0'
+            }
         }
     }
 
