@@ -36,6 +36,8 @@ jobs:
 
         env:
           VERSION_CODE: steps.read_property.outputs.value
+
+        - name: Do something with your bumped release version
           run: echo ${{ VERSION_CODE }}
 
 #      - name: Build Release AAB
