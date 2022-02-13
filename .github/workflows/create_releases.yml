@@ -24,6 +24,16 @@ jobs:
      
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
+
+      - name: Read value from Properties-file
+        id: read_property
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: 'version.properties'
+          property: 'versionDevelop.property'
+      - name: Do something with your bumped release version
+        run: echo ${{ steps.read_property.outputs.value }}
+        # will print "the value of 'the.key.of.the.property'"
         
       - name: Build Release AAB
         run: ./gradlew app:bundleRelease app:assembleRelease
@@ -37,6 +47,12 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: v1.0
+          path: app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         with:
@@ -49,7 +65,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: v1.0
-          path: |
-            app/build/outputs/bundle/release/*.aab
-            app/build/outputs/apk/release/*signed.apk
+          path: app/build/outputs/apk/release/*-signed.apk
           if-no-files-found: error
