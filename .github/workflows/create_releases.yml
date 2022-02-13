@@ -1,0 +1,55 @@
+name: Create Release
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:    
+    
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+     
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+        
+      - name: Build Release AAB
+        run: ./gradlew app:bundleRelease app:assembleRelease
+        
+      - name: Sign AAB
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: v1.0
+          path: |
+            app/build/outputs/bundle/release/*.aab
+            app/build/outputs/apk/release/*signed.apk
+          if-no-files-found: error
