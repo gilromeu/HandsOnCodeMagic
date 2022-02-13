@@ -37,7 +37,8 @@ jobs:
           VERSION: ${{ steps.read_property.outputs.value }}
 
       - name: Build Release AAB
-        run: ./gradlew app:bundleRelease app:assembleRelease
+        run: ./gradlew app:bundleRelease
+        #run: ./gradlew app:bundleRelease app:assembleRelease
 
       - uses: iota9star/sign-android-release@v1.0.5
         name: Sign app APK
@@ -54,7 +55,7 @@ jobs:
       # Example use of `signedReleaseFile` output -- not needed
       - uses: actions/upload-artifact@v2
         with:
-          name: Signed app bundle
+          name: Signed app
           path: ${{steps.sign_app.outputs.signedReleaseFiles}}
 #
 #      - name: Sign AAB
