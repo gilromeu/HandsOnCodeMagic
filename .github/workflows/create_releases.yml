@@ -35,6 +35,7 @@ jobs:
         run: echo ${{ steps.read_property.outputs.value }}
         env:
           VERSION: ${{ steps.read_property.outputs.value }}
+          name: Mostrando a versão
           run: echo ${{ env.VERSION }}
 #      - name: Build Release AAB
 #        run: ./gradlew app:bundleRelease app:assembleRelease
