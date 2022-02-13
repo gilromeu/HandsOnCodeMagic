@@ -30,7 +30,7 @@ jobs:
         uses: christian-draeger/read-properties@1.0.1
         with:
           path: 'version.properties'
-          property: 'versionDevelop.property'
+          property: 'versionDevelop'
       - name: Do something with your bumped release version
         run: echo ${{ steps.read_property.outputs.value }}
         # will print "the value of 'the.key.of.the.property'"
