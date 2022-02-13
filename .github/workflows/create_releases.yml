@@ -51,5 +51,5 @@ jobs:
           name: v1.0
           path: |
             app/build/outputs/bundle/release/*.aab
-            app/build/outputs/apk/release/*.apk
+            app/build/outputs/apk/release/*signed.apk
           if-no-files-found: error
