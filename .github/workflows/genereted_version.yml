@@ -50,7 +50,8 @@ jobs:
   Build_Release_APK:
 
     runs-on: ubuntu-latest
-      
+    needs: Build_Release_AAB
+    
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -68,7 +69,7 @@ jobs:
     - name: Sign APK
       uses: r0adkll/sign-android-release@v1
       with:
-        releaseDirectory: app/build/outputs/bundle/release
+        releaseDirectory: app/build/outputs/apk/release
         signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
