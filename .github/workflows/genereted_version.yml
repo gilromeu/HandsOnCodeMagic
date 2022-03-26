@@ -40,12 +40,12 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
           
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - id: steps2
-      - uses: actions/upload-artifact@v3
-        with:
-          name: v1.0
-          path: app/build/outputs/bundle/release/*.aab
+  #job2:
+    #runs-on: ubuntu-latest
+    #needs: job1
+    #steps:
+      #- id: steps2
+      #- uses: actions/upload-artifact@v3
+       # with:
+          #name: v1.0
+          #path: app/build/outputs/bundle/release/*.aab
