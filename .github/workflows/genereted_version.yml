@@ -63,12 +63,12 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
         
-  upload:
+ # upload:
   
-    runs-on: ubuntu-latest
+     # runs-on: ubuntu-latest
     
-    steps:
-      - uses: actions/upload-artifact@v3
-        with:
-          name: v1.0
-          path: app/build/outputs/bundle/release/*.aab
+     # steps:
+       # - uses: actions/upload-artifact@v3
+        #  with:
+          #  name: v1.0
+           # path: app/build/outputs/bundle/release/*.aab
