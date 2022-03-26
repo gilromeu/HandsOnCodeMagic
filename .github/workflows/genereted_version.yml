@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: job1
     steps:
-      - id: steps1
+      - id: steps2
       - uses: actions/upload-artifact@v3
         with:
           name: v1.0
