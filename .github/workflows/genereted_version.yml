@@ -45,7 +45,7 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
-  Sign_AAB:
+  sign:
     runs-on: ubuntu-latest
     steps:
       - id: step2
