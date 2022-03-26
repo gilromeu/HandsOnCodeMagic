@@ -14,7 +14,7 @@ on:
     branches: [ main ]
 
 jobs:
-  job1:
+  build:
     runs-on: ubuntu-latest
     steps:
       - id: steps1
