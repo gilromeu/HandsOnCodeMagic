@@ -3,10 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-def versionPropertiesFile = rootProject.file("version.properties")
-def versionProperties = new Properties()
-versionProperties.load(new FileInputStream(versionPropertiesFile))
-
 android {
     compileSdk 31
 
@@ -16,11 +12,10 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-        setProperty("archivesBaseName", versionProperties['versionProduction'] )
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
+    /*signingConfigs {
         /*release {
             if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
                 System.out.println("If")
@@ -65,13 +60,13 @@ android {
                 keyAlias 'key0'
             }
         }
-    }
+    }*/
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.develop
+           // signingConfig signingConfigs.develop
         }
     }
     compileOptions {
