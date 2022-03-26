@@ -35,15 +35,6 @@ jobs:
       
    # - name: Build Release APK
    #   run: ./gradlew assembleRelease 
-      
-    - name: Sign AAB
-      uses: r0adkll/sign-android-release@v1
-      with:
-        releaseDirectory: app/build/outputs/bundle/release
-        signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
   sign:
     runs-on: ubuntu-latest
