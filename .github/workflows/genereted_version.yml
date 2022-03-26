@@ -44,19 +44,19 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
-  Sign_AAB:
+   # Sign_AAB:
 
-    runs-on: ubuntu-latest
+     # runs-on: ubuntu-latest
     
-    steps:
-    - uses: r0adkll/sign-android-release@v1     
-    - name: Sign AAB
-      with:
-        releaseDirectory: app/build/outputs/bundle/release
-        signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+     # steps:
+     # - uses: r0adkll/sign-android-release@v1     
+     # - name: Sign AAB
+      #  with:
+       #   releaseDirectory: app/build/outputs/bundle/release
+        #  signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
+        #  alias: ${{ secrets.ALIAS }}
+        #  keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+        #  keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
         
  # upload:
   
