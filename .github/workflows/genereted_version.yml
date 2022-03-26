@@ -45,3 +45,15 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+        
+        
+  upload:
+
+    runs-on: ubuntu-latest
+    needs: sign
+    steps:
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: v1.0
+        path: app/build/outputs/bundle/release/*.aab
