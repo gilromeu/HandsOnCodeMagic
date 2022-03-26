@@ -32,8 +32,8 @@ jobs:
     - name: Build Release AAB
       run: ./gradlew bundleRelease 
       
-    - name: Build Release APK
-      run: ./gradlew assembleRelease 
+   # - name: Build Release APK
+   #   run: ./gradlew assembleRelease 
       
     - name: Sign AAB
       uses: r0adkll/sign-android-release@v1
@@ -44,4 +44,6 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
  
-  
+    - uses: actions/upload-artifact@v3
+      with:
+        path: app/build/outputs/bundle/release/*.aab
