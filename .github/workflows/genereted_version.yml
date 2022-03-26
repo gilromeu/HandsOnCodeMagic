@@ -30,7 +30,7 @@ jobs:
       run: chmod +x ./gradlew
       
     - name: Build Release AAB
-      run: ./gradlew assembleRelease
+      run: ./gradlew app:assembleRelease
       
     - name: Sign AAB
       uses: r0adkll/sign-android-release@v1
