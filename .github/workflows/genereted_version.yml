@@ -14,7 +14,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  job1:
 
     runs-on: ubuntu-latest
 
@@ -40,3 +40,6 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
+ 
+ 
+  
