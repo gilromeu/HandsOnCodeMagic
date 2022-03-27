@@ -15,57 +15,42 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    /*signingConfigs {
-        /*release {
-            if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
-                System.out.println("If")
-                storeFile file(System.getenv()["FCI_KEYSTORE_PATH"])
-                storePassword System.getenv()["FCI_KEYSTORE_PASSWORD"]
-                keyAlias System.getenv()["FCI_KEY_ALIAS"]
-                keyPassword System.getenv()["FCI_KEY_PASSWORD"]
-            } else {
-                System.out.println("Else")
-                storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
-                storePassword '667624'
-                keyPassword '667624'
-                keyAlias 'key0'
-            }
-        }
-
+    signingConfigs {
         develop {
-            if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
-                System.out.println("Configuração no Github Actions")
-                storeFile file(System.getenv()["SIGNING_KEY_BASE64"])
-                storePassword System.getenv()["KEY_STORE_PASSWORD"]
-                keyAlias System.getenv()["ALIAS"]
-                keyPassword System.getenv()["KEY_STORE_PASSWORD"]
-            } else {
-                storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
-                storePassword '667624'
-                keyPassword '667624'
-                keyAlias 'key0'
-            }
+            storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
+            storePassword '667624'
+            keyPassword '667624'
+            keyAlias 'key0'
         }
         production {
-            if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
-                System.out.println("Configuração no Github Actions")
-                storeFile file(System.getenv()["SIGNING_KEY_BASE64"])
-                storePassword System.getenv()["KEY_STORE_PASSWORD"]
-                keyAlias System.getenv()["ALIAS"]
-                keyPassword System.getenv()["KEY_STORE_PASSWORD"]
-            } else {
-                storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
-                storePassword '667624'
-                keyPassword '667624'
-                keyAlias 'key0'
-            }
+            storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
+            storePassword '667624'
+            keyPassword '667624'
+            keyAlias 'key0'
         }
-    }*/
+    }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "production"
+    productFlavors {
+        production {
+            versionCode 1
+            dimension "production"
+            applicationIdSuffix '.production'
+            versionNameSuffix ' - production'
+            signingConfig signingConfigs.production
+        }
+        develop {
+            versionCode 1
+            dimension "production"
+            applicationIdSuffix '.develop'
+            versionNameSuffix ' - develop'
+            signingConfig signingConfigs.develop
         }
     }
     compileOptions {
