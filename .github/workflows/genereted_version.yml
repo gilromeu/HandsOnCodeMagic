@@ -35,7 +35,7 @@ jobs:
     - name: Sign AAB
       uses: r0adkll/sign-android-release@v1
       with:
-        releaseDirectory: app/build/outputs/bundle/release
+        releaseDirectory: app/build/outputs/bundle/productionRelease
         signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -45,7 +45,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: v1.0
-        path: app/build/outputs/bundle/release/*.aab
+        path: app/build/outputs/bundle/productionRelease/*.aab
     
   Build_Release_APK:
 
@@ -69,7 +69,7 @@ jobs:
     - name: Sign APK
       uses: r0adkll/sign-android-release@v1
       with:
-        releaseDirectory: app/build/outputs/apk/release
+        releaseDirectory: app/build/outputs/apk/productionRelease
         signingKeyBase64: ${{ secrets.SIGNING_KEY_BASE64 }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -79,4 +79,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: v1.0
-        path: app/build/outputs/apk/release/*-signed.apk   
+        path: app/build/outputs/apk/productionRelease/*-signed.apk
