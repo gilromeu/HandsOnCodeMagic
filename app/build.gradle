@@ -15,7 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
+    /*signingConfigs {
         develop {
             storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
             storePassword '667624'
@@ -28,7 +28,7 @@ android {
             keyPassword '667624'
             keyAlias 'key0'
         }
-    }
+    }*/
 
     buildTypes {
         release {
@@ -43,14 +43,14 @@ android {
             dimension "production"
             applicationIdSuffix '.production'
             versionNameSuffix ' - production'
-            signingConfig signingConfigs.production
+            //signingConfig signingConfigs.production
         }
         develop {
             versionCode 1
             dimension "production"
             applicationIdSuffix '.develop'
             versionNameSuffix ' - develop'
-            signingConfig signingConfigs.develop
+            //signingConfig signingConfigs.develop
         }
     }
     compileOptions {
