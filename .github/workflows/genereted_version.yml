@@ -52,13 +52,13 @@ jobs:
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
     - name: Rename AAB
-      run: mv ${{steps.sign_app.outputs.signedReleaseFile}} ${{ steps.read_property.outputs.value }}.aab
+      run: mv ${{steps.sign_app.outputs.signedReleaseFile}} v${{ steps.read_property.outputs.value }}.aab
 
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
         name: ${{ steps.read_property.outputs.value }}
-        path: ${{ steps.read_property.outputs.value }}.aab
+        path: v${{ steps.read_property.outputs.value }}.aab
 
   Build_Release_APK:
 
