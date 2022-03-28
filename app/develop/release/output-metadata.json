@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.sample.handsoncodemagic.develop",
+  "variantName": "developRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 14,
+      "versionName": "1.0 - develop",
+      "outputFile": "app-develop-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

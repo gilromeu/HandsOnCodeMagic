@@ -32,6 +32,15 @@ jobs:
     - name: Build Release AAB
       run: ./gradlew bundleProduction
 
+    - name: Read value from Properties-versionName
+      id: read_property
+      uses: christian-draeger/read-properties@1.0.1
+      with:
+        path: 'versionName.properties'
+        property: 'versionName'
+    - name: Release Version
+      run: echo ${{ steps.read_property.outputs.value }}
+
     - name: Sign AAB
       uses: r0adkll/sign-android-release@v1
       with:

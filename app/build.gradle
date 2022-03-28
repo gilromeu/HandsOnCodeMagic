@@ -3,19 +3,55 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+//Carregar informações do código de versão dentro do arquivo versionCode.properties
+def versionPropsFile = file('versionCode.properties')
+def Properties versionCodeProps = new Properties()
+
+if (versionPropsFile.canRead()) {
+    versionCodeProps.load(new FileInputStream(versionPropsFile))
+}
+else {
+    versionCodeProps['VERSION_CODE_DEVELOP']='0'
+    versionCodeProps['VERSION_CODE_PRODUCTION']='0'
+}
+
+// Incrementando os valores das variáveis obtidas
+def codeDevelop = versionCodeProps['VERSION_CODE_DEVELOP'].toInteger() + 1
+def codeProduction = versionCodeProps['VERSION_CODE_PRODUCTION'].toInteger() + 1
+
+println "codeDevelop: ${codeDevelop}"
+println "codeProduction: ${codeProduction}"
+
+versionCodeProps['VERSION_CODE_DEVELOP']=codeDevelop.toString()
+versionCodeProps['VERSION_CODE_PRODUCTION']=codeProduction.toString()
+
+def versionNamePropsFile = rootProject.file("versionName.properties")
+def versionNameProps = new Properties()
+versionNameProps.load(new FileInputStream(versionNamePropsFile))
+
+println "versionName: v${versionNameProps['VERSION_NAME']}"
+
 android {
     compileSdk 31
+
+    // Recuperar a task que está sendo executada e realizado uma verificação
+    // somente para salvar as variáveis incrementada do versionCode quando
+    // for realizado um build para gerar um novo bundle
+    def runTasks = gradle.startParameter.taskNames
+    if (':app:bundleDevelopRelease' in runTasks || ':app:bundleProductionRelease' in runTasks) {
+        versionCodeProps.store(versionPropsFile.newWriter(), null)
+    }
 
     defaultConfig {
         applicationId "com.sample.handsoncodemagic"
         minSdk 24
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName "v$versionNameProps['VERSION_NAME']"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    /*signingConfigs {
+    signingConfigs {
         develop {
             storeFile file('D:\\Development\\HandsOnCodeMagic\\keystore\\key_story.jks')
             storePassword '667624'
@@ -28,7 +64,7 @@ android {
             keyPassword '667624'
             keyAlias 'key0'
         }
-    }*/
+    }
 
     buildTypes {
         release {
@@ -39,18 +75,18 @@ android {
     flavorDimensions "production"
     productFlavors {
         production {
-            versionCode 1
+            versionCode codeProduction
             dimension "production"
             applicationIdSuffix '.production'
             versionNameSuffix ' - production'
-            //signingConfig signingConfigs.production
+            signingConfig signingConfigs.production
         }
         develop {
-            versionCode 1
+            versionCode codeDevelop
             dimension "production"
             applicationIdSuffix '.develop'
             versionNameSuffix ' - develop'
-            //signingConfig signingConfigs.develop
+            signingConfig signingConfigs.develop
         }
     }
     compileOptions {
