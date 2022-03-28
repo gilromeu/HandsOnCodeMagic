@@ -88,8 +88,11 @@ jobs:
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
+    - name: Versao
+      run: echo ${{steps.sign_app.outputs.signedReleaseFile}}
+
     - name: Rename AAB
-      run: mv ${{steps.sign_app.outputs.signedReleaseFile}} "v${{ steps.read_property.outputs.value }}.apk"
+      run: mv ${{steps.sign_app.outputs.signedReleaseFile}} 'v${{ steps.read_property.outputs.value }}.apk'
 
     - name: Upload
       uses: actions/upload-artifact@v3
