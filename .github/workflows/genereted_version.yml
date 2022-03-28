@@ -42,6 +42,7 @@ jobs:
       run: echo ${{ steps.read_property.outputs.value }}
 
     - name: Sign AAB
+      id: sign_app
       uses: r0adkll/sign-android-release@v1
       with:
         releaseDirectory: app/build/outputs/bundle/productionRelease
@@ -49,13 +50,16 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
         keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
-    
+
+    - name: Rename AAB
+      run: mv ${{steps.sign_app.outputs.signedReleaseFile}} ${{ steps.read_property.outputs.value }}.aab
+
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: v1.0
-        path: app/build/outputs/bundle/productionRelease/*.aab
-    
+        name: ${{ steps.read_property.outputs.value }}
+        path: ${{ steps.read_property.outputs.value }}.aab
+
   Build_Release_APK:
 
     runs-on: ubuntu-latest
