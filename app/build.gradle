@@ -29,7 +29,7 @@ def versionNamePropsFile = rootProject.file("versionName.properties")
 def versionNameProps = new Properties()
 versionNameProps.load(new FileInputStream(versionNamePropsFile))
 
-println "versionName: v${versionNameProps['VERSION_NAME']}"
+println "versionName: v${versionNameProps['versionName']}"
 
 android {
     compileSdk 31
